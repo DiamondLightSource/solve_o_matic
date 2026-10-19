@@ -4,4 +4,4 @@ full_path="$(cd "${0%/*}" 2>/dev/null; echo "$PWD"/"${0##*/}")"
 export SOM_ROOT=`dirname "$full_path" | sed 's/\/bin$//'`
 export XIA2CORE_ROOT=${SOM_ROOT}/lib/xia2core
 
-cctbx.python $SOM_ROOT/src/pipelines/strategy.py $@
+cctbx.python $SOM_ROOT/src/pipelines/strategy.py "$@"
