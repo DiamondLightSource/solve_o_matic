@@ -17,6 +17,6 @@ CVSTag = "xia2core-%s" % VersionNumber.replace('.', '_')
 Directory = "xia2core-%s" % VersionNumber
 
 if __name__ == '__main__':
-    print 'This is XIA 2 Core version %s' % VersionNumber
-    print 'This should be in a directory called "%s"' % Directory
-    print 'And should be CVS tagged as "%s"' % CVSTag
+    print('This is XIA 2 Core version %s' % VersionNumber)
+    print('This should be in a directory called "%s"' % Directory)
+    print('And should be CVS tagged as "%s"' % CVSTag)

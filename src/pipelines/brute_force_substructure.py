@@ -1,6 +1,5 @@
 import os
 import sys
-import exceptions
 
 #if not 'SOM_ROOT' in os.environ:
 #    raise RuntimeError, 'SOM_ROOT undefined'
@@ -13,8 +12,8 @@ from cctbx.sgtbx import space_group, space_group_symbols, \
 from cctbx.uctbx import unit_cell
 from iotbx import mtz
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -140,9 +139,9 @@ def brute_force_substructure(hklin):
     for j, job in enumerate(jobs):
         try:
            job.stop()
-        except exceptions.Exception, e:
-            print e
-            print job.get_traceback()
+        except Exception as e:
+            print(e)
+            print(job.get_traceback())
 
     best_cc_weak = 0.0
     best_cc = 0.0
@@ -153,15 +152,15 @@ def brute_force_substructure(hklin):
         for nha in useful_nha(uc, pointgroup):
             cc, cc_weak = substructure_pipelines[(spacegroup, nha)].get_cc()
 
-            if cc_weak > best_cc_weak:
+            if cc_weak is not None and cc_weak > best_cc_weak:
                 best_cc_weak = cc_weak
                 best_cc = cc
                 best_spacegroup = spacegroup
                 best_nha = nha
 
 
-    print 'Best solution: %s with %d sites, %.3f / %.3f' % \
-          (best_spacegroup, best_nha, best_cc, best_cc_weak)
+    print('Best solution: %s with %d sites, %.3f / %.3f' % \
+          (best_spacegroup, best_nha, best_cc, best_cc_weak))
 
     return
 

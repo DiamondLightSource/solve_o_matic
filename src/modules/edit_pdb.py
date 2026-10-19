@@ -2,7 +2,7 @@ import os
 import sys
 
 if not 'CCP4' in os.environ:
-    raise RuntimeError, 'CCP4 undefined'
+    raise RuntimeError('CCP4 undefined')
 
 class edit_pdb:
     '''A class to edit a pdb file to remove named ligands & monomers, or just
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     ep = edit_pdb()
 
     if len(sys.argv) < 3:
-        raise RuntimeError, '%s xyzin xyzout [monomers to remove]' % \
-              sys.argv[0]
+        raise RuntimeError('%s xyzin xyzout [monomers to remove]' % \
+              sys.argv[0])
 
     ep.edit_pdb(sys.argv[1], sys.argv[2], sys.argv[3:])

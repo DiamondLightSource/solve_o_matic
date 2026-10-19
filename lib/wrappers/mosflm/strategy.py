@@ -1,8 +1,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -170,10 +170,10 @@ if __name__ == '__main__':
         ms.add_image(image)
     ms.strategy()
 
-    print 'Native'
-    print 'Phi range: %.1f to %.1f' % (ms.get_phi_start(), ms.get_phi_end())
-    print 'Phi width: %.1f' % ms.get_phi_width()
-    print 'Completeness: %.2f' % ms.get_completeness()
+    print('Native')
+    print('Phi range: %.1f to %.1f' % (ms.get_phi_start(), ms.get_phi_end()))
+    print('Phi width: %.1f' % ms.get_phi_width())
+    print('Completeness: %.2f' % ms.get_completeness())
 
     ms = Mosflm_strategy()
 
@@ -189,7 +189,7 @@ if __name__ == '__main__':
         ms.add_image(image)
     ms.strategy()
 
-    print 'Anomalous'
-    print 'Phi range: %.1f to %.1f' % (ms.get_phi_start(), ms.get_phi_end())
-    print 'Phi width: %.1f' % ms.get_phi_width()
-    print 'Completeness: %.2f' % ms.get_completeness()
+    print('Anomalous')
+    print('Phi range: %.1f to %.1f' % (ms.get_phi_start(), ms.get_phi_end()))
+    print('Phi width: %.1f' % ms.get_phi_width())
+    print('Completeness: %.2f' % ms.get_completeness())

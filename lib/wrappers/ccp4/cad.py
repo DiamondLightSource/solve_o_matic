@@ -1,8 +1,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -10,7 +10,7 @@ sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
 from Driver.DriverFactory import DriverFactory
 from Decorators.DecoratorFactory import DecoratorFactory
 
-from mtzdump import Mtzdump
+from .mtzdump import Mtzdump
 
 def Cad(DriverType = None):
 
@@ -46,7 +46,7 @@ def Cad(DriverType = None):
         # CAD...
 
         def set_hklin(self, hklin):
-            raise RuntimeError, 'cannot use set_hklin with Cad wrapper'
+            raise RuntimeError('cannot use set_hklin with Cad wrapper')
 
         def add_hklin(self, hklin):
             self._hklin_files.append(hklin)
@@ -54,7 +54,7 @@ def Cad(DriverType = None):
 
         def set_freein(self, freein, freein_column = 'FreeR_flag'):
             if not os.path.exists(freein):
-                raise RuntimeError, '%s does not exist' % freein
+                raise RuntimeError('%s does not exist' % freein)
 
             # FIXME should really check that the column is in the free file.
 
@@ -86,7 +86,7 @@ def Cad(DriverType = None):
         def merge(self):
 
             if not self._hklin_files:
-                raise RuntimeError, 'no hklin files defined'
+                raise RuntimeError('no hklin files defined')
 
             self.check_hklout()
 
@@ -113,7 +113,7 @@ def Cad(DriverType = None):
                     symmetry = this_symmetry
 
                 if this_symmetry != symmetry:
-                    raise RuntimeError, 'spacegroups do not match'
+                    raise RuntimeError('spacegroups do not match')
 
                 column_names_by_file[hklin] = []
 
@@ -122,7 +122,7 @@ def Cad(DriverType = None):
                     if name in ['H', 'K', 'L']:
                         continue
                     if name in column_names:
-                        raise RuntimeError, 'duplicate column names'
+                        raise RuntimeError('duplicate column names')
                     column_names.append(name)
                     column_names_by_file[hklin].append(name)
 
@@ -158,10 +158,10 @@ def Cad(DriverType = None):
         def update(self):
 
             if not self._hklin_files:
-                raise RuntimeError, 'no hklin files defined'
+                raise RuntimeError('no hklin files defined')
 
             if len(self._hklin_files) > 1:
-                raise RuntimeError, 'can have only one hklin to update'
+                raise RuntimeError('can have only one hklin to update')
 
             hklin = self._hklin_files[0]
 
@@ -236,18 +236,18 @@ def Cad(DriverType = None):
 
         def copyfree(self):
             if not self._hklin_files:
-                raise RuntimeError, 'no hklin files defined'
+                raise RuntimeError('no hklin files defined')
 
             if len(self._hklin_files) > 1:
-                raise RuntimeError, 'can have only one hklin to update'
+                raise RuntimeError('can have only one hklin to update')
 
             hklin = self._hklin_files[0]
 
             self.check_hklout()
             if self._freein is None:
-                raise RuntimeError, 'freein not defined'
+                raise RuntimeError('freein not defined')
             if self._freein_column is None:
-                raise RuntimeError, 'freein column not defined'
+                raise RuntimeError('freein column not defined')
 
             self.add_command_line('hklin1')
             self.add_command_line(self._freein)

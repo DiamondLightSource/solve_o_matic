@@ -19,8 +19,8 @@ import subprocess
 import os
 import copy
 
-from DefaultDriver import DefaultDriver
-from DriverHelper import kill_process
+from .DefaultDriver import DefaultDriver
+from .DriverHelper import kill_process
 
 class SimpleDriver(DefaultDriver):
 
@@ -33,7 +33,7 @@ class SimpleDriver(DefaultDriver):
 
     def start(self):
         if self._executable is None:
-            raise RuntimeError, 'no executable is set.'
+            raise RuntimeError('no executable is set.')
 
         if os.name == 'nt':
             # pass in CL as a list of tokens
@@ -102,7 +102,7 @@ class SimpleDriver(DefaultDriver):
     def _input(self, record):
 
         if not self.check():
-            raise RuntimeError, 'child process has termimated'
+            raise RuntimeError('child process has termimated')
 
         self._popen.stdin.write(record)
 
@@ -121,7 +121,7 @@ class SimpleDriver(DefaultDriver):
     def close(self):
 
         if not self.check():
-            raise RuntimeError, 'child process has termimated'
+            raise RuntimeError('child process has termimated')
 
         self._popen.stdin.close()
 

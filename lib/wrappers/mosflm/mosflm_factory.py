@@ -1,8 +1,8 @@
 import os
 
-from index import Mosflm_index
-from strategy import Mosflm_strategy
-from integrate import Mosflm_integrate
+from .index import Mosflm_index
+from .strategy import Mosflm_strategy
+from .integrate import Mosflm_integrate
 
 class mosflm_factory:
 

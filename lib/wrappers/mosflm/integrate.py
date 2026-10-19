@@ -1,8 +1,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -135,7 +135,7 @@ def Mosflm_integrate(DriverType = None):
             for f in 'bestfile.par', 'bestfile.hkl':
                 try:
                     os.chmod(os.path.join(self.get_working_directory(), f),
-                             0644)
+                             0o644)
                 except:
                     pass
 

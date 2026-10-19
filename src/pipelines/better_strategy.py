@@ -5,7 +5,7 @@ import sys
 import math
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'src'))
@@ -190,7 +190,7 @@ def write_html_file(image, character, native, anomalous):
 if __name__ == '__main__':
 
     if len(sys.argv) < 2:
-        raise RuntimeError, '%s /path/to/one/image [spacegroup]' % sys.argv[0]
+        raise RuntimeError('%s /path/to/one/image [spacegroup]' % sys.argv[0])
 
     sp = strategy_pipeline()
     sp.set_image(sys.argv[1])
@@ -201,35 +201,35 @@ if __name__ == '__main__':
     sp.strategy_pipeline_characterise()
     sp.strategy_pipeline_strategy()
 
-    print 'Unit cell: %.3f %.3f %.3f %.3f %.3f %.3f' % sp.get_cell()
-    print 'Spacegroup: %s' % sp.get_spacegroup()
-    print 'Mosaic: %.2f' % sp.get_mosaic()
+    print('Unit cell: %.3f %.3f %.3f %.3f %.3f %.3f' % sp.get_cell())
+    print('Spacegroup: %s' % sp.get_spacegroup())
+    print('Mosaic: %.2f' % sp.get_mosaic())
 
     character = (sp.get_cell(), sp.get_spacegroup(), sp.get_mosaic())
 
-    print 'Native strategy:'
-    print 'Phi range: %.1f to %.1f' % (sp.get_phi_start(), sp.get_phi_end())
-    print 'Phi width: %.1f' % sp.get_phi_width()
-    print 'No. images: %d' % sp.get_n_images()
-    print 'Completeness: %.2f' % sp.get_completeness()
-    print 'Resolution:   %.2f' % sp.get_resolution()
-    print 'Transmission (%%): %.1f' % sp.get_transmission_percent()
-    print 'Exposure time (s): %.3f' % sp.get_exposure_time()
+    print('Native strategy:')
+    print('Phi range: %.1f to %.1f' % (sp.get_phi_start(), sp.get_phi_end()))
+    print('Phi width: %.1f' % sp.get_phi_width())
+    print('No. images: %d' % sp.get_n_images())
+    print('Completeness: %.2f' % sp.get_completeness())
+    print('Resolution:   %.2f' % sp.get_resolution())
+    print('Transmission (%%): %.1f' % sp.get_transmission_percent())
+    print('Exposure time (s): %.3f' % sp.get_exposure_time())
 
     native = (sp.get_phi_start(), sp.get_phi_end(), sp.get_phi_width(),
               sp.get_n_images(), sp.get_completeness(), sp.get_resolution(),
               sp.get_transmission_percent(), sp.get_exposure_time())
 
     sp.strategy_pipeline_strategy(anomalous = True)
-    print 'Anomalous strategy:'
-    print 'Phi range: %.1f to %.1f' % \
-          (sp.get_phi_start(), sp.get_phi_end())
-    print 'Phi width: %.1f' % sp.get_phi_width()
-    print 'No. images: %d' % sp.get_n_images()
-    print 'Completeness: %.2f' % sp.get_completeness()
-    print 'Resolution:   %.2f' % sp.get_resolution()
-    print 'Transmission (%%): %.1f' % sp.get_transmission_percent()
-    print 'Exposure time (s): %.3f' % sp.get_exposure_time()
+    print('Anomalous strategy:')
+    print('Phi range: %.1f to %.1f' % \
+          (sp.get_phi_start(), sp.get_phi_end()))
+    print('Phi width: %.1f' % sp.get_phi_width())
+    print('No. images: %d' % sp.get_n_images())
+    print('Completeness: %.2f' % sp.get_completeness())
+    print('Resolution:   %.2f' % sp.get_resolution())
+    print('Transmission (%%): %.1f' % sp.get_transmission_percent())
+    print('Exposure time (s): %.3f' % sp.get_exposure_time())
 
     anomalous = (sp.get_phi_start(), sp.get_phi_end(), sp.get_phi_width(),
                  sp.get_n_images(), sp.get_completeness(), sp.get_resolution(),

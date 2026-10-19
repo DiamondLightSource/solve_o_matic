@@ -13,8 +13,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -50,10 +50,10 @@ def F2mtz(DriverType = None):
             self.check_hklout()
 
             if self._symmetry is None:
-                raise RuntimeError, 'symmetry not set'
+                raise RuntimeError('symmetry not set')
 
             if self._cell is None:
-                raise RuntimeError, 'cell not set'
+                raise RuntimeError('cell not set')
 
             self.set_task('Converting reflections to mtz %s => %s' % \
                           (os.path.split(self.getHklin())[-1],
@@ -86,4 +86,4 @@ if __name__ == '__main__':
 
     status = f.f2mtz()
 
-    print status
+    print(status)

@@ -16,7 +16,7 @@
 import os
 import subprocess
 
-from DefaultClusterDriver import DefaultClusterDriver
+from .DefaultClusterDriver import DefaultClusterDriver
 
 class SunGridEngineClusterDriver(DefaultClusterDriver):
 
@@ -35,8 +35,8 @@ class SunGridEngineClusterDriver(DefaultClusterDriver):
         for o in sge_stderr_list:
             if 'command not found' in o:
                 missing_program = o.split(':')[2].strip()
-                raise RuntimeError, 'executable "%s" missing' % \
-                      missing_program
+                raise RuntimeError('executable "%s" missing' % \
+                      missing_program)
 
     def submit(self):
         '''This is where most of the work will be done - in here is
@@ -49,7 +49,8 @@ class SunGridEngineClusterDriver(DefaultClusterDriver):
                                  '%s.sh' % self._script_name],
                                 cwd = self._working_directory,
                                 stdout = subprocess.PIPE,
-                                stderr = subprocess.PIPE)
+                                stderr = subprocess.PIPE,
+                                universal_newlines = True)
 
         # this will get all of the output as a tuple (stdout, stderr)
         stdout, stderr = pipe.communicate()
@@ -58,9 +59,9 @@ class SunGridEngineClusterDriver(DefaultClusterDriver):
         if len(stderr) > 0:
             # something probably went wrong
             if 'error opening' in stderr:
-                raise RuntimeError, 'executable "%s" does not exist' % \
+                raise RuntimeError('executable "%s" does not exist' % \
                       stdout.split('\n')[0].split(':')[0].replace(
-                    'error opening ', '')
+                    'error opening ', ''))
 
         # probably everything is ok then
 
@@ -122,4 +123,4 @@ if __name__ == '__main__':
         if not line:
             break
 
-        print line.strip()
+        print(line.strip())

@@ -7,7 +7,6 @@
 #
 # An exception to be raised if a program or class is not available.
 
-from exceptions import Exception
 
 class NotAvailableError(Exception):
     '''An exception to be raised when a program is not available'''
@@ -15,4 +14,4 @@ class NotAvailableError(Exception):
     pass
 
 if __name__ == '__main__':
-    raise NotAvailableError, 'program x nopt available'
+    raise NotAvailableError('program x nopt available')

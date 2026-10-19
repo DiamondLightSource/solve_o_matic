@@ -19,13 +19,13 @@
 
 import os
 
-from SimpleDriver import SimpleDriver
-from ScriptDriver import ScriptDriver
-from QSubDriver import QSubDriver
-from InteractiveDriver import InteractiveDriver
+from .SimpleDriver import SimpleDriver
+from .ScriptDriver import ScriptDriver
+from .QSubDriver import QSubDriver
+from .InteractiveDriver import InteractiveDriver
 
 # another factory to delegate to
-from ClusterDriverFactory import ClusterDriverFactory
+from .ClusterDriverFactory import ClusterDriverFactory
 
 class _DriverFactory:
 
@@ -39,7 +39,7 @@ class _DriverFactory:
         # should probably write a message or something explaining
         # that the following Driver implementation is being used
 
-        if os.environ.has_key('XIA2CORE_DRIVERTYPE'):
+        if 'XIA2CORE_DRIVERTYPE' in os.environ:
             self.setDriver_type(os.environ['XIA2CORE_DRIVERTYPE'])
 
         return
@@ -51,7 +51,7 @@ class _DriverFactory:
         '''Set the kind of driver this factory should produce.'''
 
         if not type in self._implemented_types:
-            raise RuntimeError, 'unimplemented driver class: %s' % type
+            raise RuntimeError('unimplemented driver class: %s' % type)
 
         self._driver_type = type
 
@@ -79,7 +79,7 @@ class _DriverFactory:
         if type == 'qsub':
             return QSubDriver()
 
-        raise RuntimeError, 'Driver class "%s" unknown' % type
+        raise RuntimeError('Driver class "%s" unknown' % type)
 
 DriverFactory = _DriverFactory()
 

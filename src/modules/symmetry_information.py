@@ -2,12 +2,12 @@ import os
 import sys
 
 if not 'CCP4' in os.environ:
-    raise RuntimeError, 'CCP4 not defined'
+    raise RuntimeError('CCP4 not defined')
 
 symop_lib = os.path.join(os.environ['CCP4'], 'lib', 'data', 'symop.lib')
 
 if not os.path.exists(symop_lib):
-    raise RuntimeError, 'CCP4 symmetry library missing: %s' % symop_lib
+    raise RuntimeError('CCP4 symmetry library missing: %s' % symop_lib)
 
 class symmetry_information:
 
@@ -48,7 +48,7 @@ class symmetry_information:
 
     def get_long_name(self, short_name):
         if not short_name in self._short_name_to_long_name:
-            raise RuntimeError, 'short name %s not known' % short_name
+            raise RuntimeError('short name %s not known' % short_name)
 
         return self._short_name_to_long_name[short_name]
 
@@ -58,7 +58,7 @@ class symmetry_information:
             return long_name
 
         if not long_name in self._long_name_to_short_name:
-            raise RuntimeError, 'long name %s not known' % long_name
+            raise RuntimeError('long name %s not known' % long_name)
 
         return self._long_name_to_short_name[long_name]
 
@@ -68,7 +68,7 @@ class symmetry_information:
             short_name = self._long_name_to_short_name[short_name]
 
         if not short_name in self._short_name_to_number:
-            raise RuntimeError, 'short name %s not known' % short_name
+            raise RuntimeError('short name %s not known' % short_name)
 
         return self._short_name_to_number[short_name]
 
@@ -84,12 +84,12 @@ class symmetry_information:
             short_name = self._long_name_to_short_name[short_name]
 
         if not short_name in self._short_name_to_pointgroup:
-            raise RuntimeError, 'short name %s not known' % short_name
+            raise RuntimeError('short name %s not known' % short_name)
 
         return self._short_name_to_pointgroup[short_name]
 
 if __name__ == '__main__':
     si = symmetry_information()
 
-    print si.get_pointgroup('P212121')
-    print si.get_pointgroup('P 21 21 21')
+    print(si.get_pointgroup('P212121'))
+    print(si.get_pointgroup('P 21 21 21'))

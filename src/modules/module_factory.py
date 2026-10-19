@@ -1,20 +1,20 @@
 import os
 
-from intensity_data_preparation import intensity_data_preparation as \
+from .intensity_data_preparation import intensity_data_preparation as \
      _intensity_data_preparation
-from pdb_preparation import pdb_preparation as _pdb_preparation
-from rigid_body_refine import rigid_body_refine as _rigid_body_refine
-from refine import refine as _refine
-from interrogate_mtz import interrogate_mtz as _interrogate_mtz
-from interrogate_pdb import interrogate_pdb as _interrogate_pdb
-from symmetry_information import symmetry_information as \
+from .pdb_preparation import pdb_preparation as _pdb_preparation
+from .rigid_body_refine import rigid_body_refine as _rigid_body_refine
+from .refine import refine as _refine
+from .interrogate_mtz import interrogate_mtz as _interrogate_mtz
+from .interrogate_pdb import interrogate_pdb as _interrogate_pdb
+from .symmetry_information import symmetry_information as \
      _symmetry_information
-from find_sites import find_sites as _find_sites
-from characterise_diffraction import characterise_diffraction as \
+from .find_sites import find_sites as _find_sites
+from .characterise_diffraction import characterise_diffraction as \
      _characterise_diffraction
-from calculate_strategy import calculate_strategy as \
+from .calculate_strategy import calculate_strategy as \
      _calculate_strategy
-from calculate_better_strategy import calculate_better_strategy as \
+from .calculate_better_strategy import calculate_better_strategy as \
      _calculate_better_strategy
 
 class module_factory:

@@ -2,8 +2,8 @@ import os
 import sys
 import shutil
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -73,7 +73,7 @@ def Pointless(DriverType = None):
 if __name__ == '__main__':
 
     if len(sys.argv) != 4:
-        raise RuntimeError, '%s hklin xyzin hklout' % sys.argv[0]
+        raise RuntimeError('%s hklin xyzin hklout' % sys.argv[0])
 
     hklin = sys.argv[1]
     xyzin = sys.argv[2]
@@ -87,4 +87,4 @@ if __name__ == '__main__':
 
     p.check_origin()
 
-    print '%s %.2f' % (p.get_reindex(), p.get_cc())
+    print('%s %.2f' % (p.get_reindex(), p.get_cc()))

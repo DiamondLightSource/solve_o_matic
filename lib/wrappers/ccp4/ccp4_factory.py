@@ -1,15 +1,15 @@
 import os
 
-from cad import Cad
-from freerflag import Freerflag
-from mtzdump import Mtzdump
-from pdbset import Pdbset
-from refmac5 import Refmac5
-from reindex import Reindex
-from truncate import Truncate
-from unique import Unique
-from phaser import Phaser
-from pointless import Pointless
+from .cad import Cad
+from .freerflag import Freerflag
+from .mtzdump import Mtzdump
+from .pdbset import Pdbset
+from .refmac5 import Refmac5
+from .reindex import Reindex
+from .truncate import Truncate
+from .unique import Unique
+from .phaser import Phaser
+from .pointless import Pointless
 
 class ccp4_factory:
 

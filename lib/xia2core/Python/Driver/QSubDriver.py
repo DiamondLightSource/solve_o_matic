@@ -38,15 +38,15 @@ import subprocess
 import time
 import random
 
-from DefaultDriver import DefaultDriver
-from DriverHelper import script_writer
+from .DefaultDriver import DefaultDriver
+from .DriverHelper import script_writer
 
 class QSubDriver(DefaultDriver):
 
     def __init__(self):
 
         if os.name != 'posix':
-            raise RuntimeError, 'os "%s" not supported' % os.name
+            raise RuntimeError('os "%s" not supported' % os.name)
 
         DefaultDriver.__init__(self)
 
@@ -88,8 +88,8 @@ class QSubDriver(DefaultDriver):
         for o in sge_stderr_list:
             if 'command not found' in o:
                 missing_program = o.split(':')[2].strip()
-                raise RuntimeError, 'executable "%s" missing' % \
-                      missing_program
+                raise RuntimeError('executable "%s" missing' % \
+                      missing_program)
 
     def _input(self, record):
         self._script_standard_input.append(record)
@@ -121,7 +121,8 @@ class QSubDriver(DefaultDriver):
                                  '%s.sh' % self._script_name],
                                 cwd = self._working_directory,
                                 stdout = subprocess.PIPE,
-                                stderr = subprocess.PIPE)
+                                stderr = subprocess.PIPE,
+                                universal_newlines = True)
 
         # this will get all of the output as a tuple (stdout, stderr)
         stdout, stderr = pipe.communicate()
@@ -130,9 +131,9 @@ class QSubDriver(DefaultDriver):
         if len(stderr) > 0:
             # something probably went wrong
             if 'error opening' in stderr:
-                raise RuntimeError, 'executable "%s" does not exist' % \
+                raise RuntimeError('executable "%s" does not exist' % \
                       stdout.split('\n')[0].split(':')[0].replace(
-                    'error opening ', '')
+                    'error opening ', ''))
 
         # probably everything is ok then
 
@@ -146,7 +147,8 @@ class QSubDriver(DefaultDriver):
             pipe = subprocess.Popen(['qstat', '-j', '%s' % job_id],
                                     cwd = self._working_directory,
                                     stdout = subprocess.PIPE,
-                                    stderr = subprocess.PIPE)
+                                    stderr = subprocess.PIPE,
+                                    universal_newlines = True)
 
             stdout, stderr = pipe.communicate()
 
@@ -221,4 +223,4 @@ if __name__ == '__main__':
         if not line:
             break
 
-        print line.strip()
+        print(line.strip())

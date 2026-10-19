@@ -2,7 +2,7 @@ import os
 import sys
 
 if not 'CCP4' in os.environ:
-    raise RuntimeError, 'CCP4 undefined'
+    raise RuntimeError('CCP4 undefined')
 
 class check_pdb:
     '''A class to check that the ligands in a PDB file all appear in the
@@ -43,10 +43,10 @@ class check_pdb:
             unknown_residues = unknown[0]
             for m in unknown_residues[1:]:
                 unknown_residues += ' %s' % m
-            raise RuntimeError, 'Unknown residues: %s' % unknown_residues
+            raise RuntimeError('Unknown residues: %s' % unknown_residues)
 
         if not CRYST1:
-            raise RuntimeError, 'CRYST1 record not found'
+            raise RuntimeError('CRYST1 record not found')
 
         return
 
@@ -55,12 +55,12 @@ if __name__ == '__main__':
     cpl = check_pdb()
 
     if len(sys.argv) < 2:
-        raise RuntimeError, '%s file.pdb [...]' % sys.argv[0]
+        raise RuntimeError('%s file.pdb [...]' % sys.argv[0])
 
     for arg in sys.argv[1:]:
-        print arg
+        print(arg)
         try:
             cpl.check_pdb(arg)
-            print 'ok'
-        except Exception, e:
-            print e
+            print('ok')
+        except Exception as e:
+            print(e)

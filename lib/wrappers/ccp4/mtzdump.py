@@ -2,8 +2,8 @@ import os
 import sys
 import copy
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 xia2core_root = os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python')
@@ -90,8 +90,8 @@ def Mtzdump(DriverType = None):
                         project = output[5 * block + i + 2][10:].strip()
                         crystal = output[5 * block + i + 3][10:].strip()
                         dataset = output[5 * block + i + 4][10:].strip()
-                        cell = map(float, output[5 * block + i + 5].strip(
-                            ).split())
+                        cell = list(map(float, output[5 * block + i + 5].strip(
+                            ).split()))
                         wavelength = float(output[5 * block + i + 6].strip())
 
                         dataset_id = '%s/%s/%s' % \
@@ -153,15 +153,15 @@ if __name__ == '__main__':
     columns = mtzdump.get_columns()
 
     for c in columns:
-        print '%12s (%s)' % c
+        print('%12s (%s)' % c)
 
     datasets = mtzdump.get_datasets()
 
     for d in datasets:
-        print '%s' % d
+        print('%s' % d)
         info = mtzdump.get_dataset_info(d)
-        print '%s (%6.4fA) %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f' % \
+        print('%s (%6.4fA) %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f' % \
               (info['symmetry'], info['wavelength'],
                info['cell'][0], info['cell'][1], info['cell'][2],
-               info['cell'][1], info['cell'][4], info['cell'][5])
-    print '%.2f %.2f' % mtzdump.get_resolution_range()
+               info['cell'][1], info['cell'][4], info['cell'][5]))
+    print('%.2f %.2f' % mtzdump.get_resolution_range())

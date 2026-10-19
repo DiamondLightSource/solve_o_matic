@@ -41,7 +41,7 @@
 import os
 import sys
 
-from DecoratorHelper import inherits_from
+from .DecoratorHelper import inherits_from
 
 def CCP4DecoratorFactory(DriverInstance):
     '''Create a CCP4 decorated Driver instance - based on the Driver
@@ -57,8 +57,8 @@ def CCP4DecoratorFactory(DriverInstance):
     # directly.
 
     if not inherits_from(DriverInstanceClass, 'DefaultDriver'):
-        raise RuntimeError, 'object %s is not a Driver implementation' % \
-              str(DriverInstance)
+        raise RuntimeError('object %s is not a Driver implementation' % \
+              str(DriverInstance))
 
     # verify that the object matches the Driver specification
 
@@ -117,9 +117,9 @@ def CCP4DecoratorFactory(DriverInstance):
 
         def checkHklin(self):
             if self._hklin is None:
-                raise RuntimeError, 'hklin not defined'
+                raise RuntimeError('hklin not defined')
             if not os.path.exists(self._hklin):
-                raise RuntimeError, 'hklin %s does not exist' % self._hklin
+                raise RuntimeError('hklin %s does not exist' % self._hklin)
 
         def set_hklout(self, hklout):
             return self.setHklout(hklout)
@@ -139,14 +139,13 @@ def CCP4DecoratorFactory(DriverInstance):
 
         def checkHklout(self):
             if self._hklout is None:
-                raise RuntimeError, 'hklout not defined'
+                raise RuntimeError('hklout not defined')
 
             # check that these are different files!
 
             if self._hklout == self._hklin:
-                raise RuntimeError, \
-                      'hklout and hklin are the same file (%s)' % \
-                      str(self._hklin)
+                raise RuntimeError('hklout and hklin are the same file (%s)' % \
+                      str(self._hklin))
 
         def set_xyzin(self, xyzin):
             return self.setXyzin(xyzin)
@@ -166,9 +165,9 @@ def CCP4DecoratorFactory(DriverInstance):
 
         def checkXyzin(self):
             if self._xyzin is None:
-                raise RuntimeError, 'xyain not defined'
+                raise RuntimeError('xyain not defined')
             if not os.path.exists(self._xyzin):
-                raise RuntimeError, 'xyzin %s does not exist' % self._xyzin
+                raise RuntimeError('xyzin %s does not exist' % self._xyzin)
 
         def set_xyzout(self, xyzout):
             return self.setXyzout(xyzout)
@@ -188,7 +187,7 @@ def CCP4DecoratorFactory(DriverInstance):
 
         def checkXyzout(self):
             if self._xyzout is None:
-                raise RuntimeError, 'xyzout not defined'
+                raise RuntimeError('xyzout not defined')
 
         def set_mapin(self, mapin):
             return self.setMapin(mapin)
@@ -208,9 +207,9 @@ def CCP4DecoratorFactory(DriverInstance):
 
         def checkMapin(self):
             if self._mapin is None:
-                raise RuntimeError, 'mapin not defined'
+                raise RuntimeError('mapin not defined')
             if not os.path.exists(self._mapin):
-                raise RuntimeError, 'mapin %s does not exist' % self._mapin
+                raise RuntimeError('mapin %s does not exist' % self._mapin)
 
         def set_mapout(self, mapout):
             return self.setMapout(mapout)
@@ -230,7 +229,7 @@ def CCP4DecoratorFactory(DriverInstance):
 
         def checkMapout(self):
             if self._mapout is None:
-                raise RuntimeError, 'mapout not defined'
+                raise RuntimeError('mapout not defined')
 
         def describe(self):
             '''An overloading of the Driver describe() method.'''
@@ -269,7 +268,7 @@ def CCP4DecoratorFactory(DriverInstance):
             scratch directories. The latter shouldnt be needed however.'''
 
             for env in ['BINSORT_SCR', 'CCP4_SCR']:
-                if os.environ.has_key(env):
+                if env in os.environ:
                     directory = os.environ[env]
                     self.add_scratch_directory(directory)
                     try:
@@ -313,7 +312,7 @@ def CCP4DecoratorFactory(DriverInstance):
             # check that the program has finished...
 
             if not self.finished():
-                raise RuntimeError, 'program has not finished'
+                raise RuntimeError('program has not finished')
 
             for line in self.get_all_output():
                 if 'CCP4 library signal' in line:
@@ -331,12 +330,12 @@ def CCP4DecoratorFactory(DriverInstance):
                         for l in self.get_all_output():
                             if '>>>>>> System signal' in l:
                                 cause = l.split(':')[1].split('(')[0]
-                                raise RuntimeError, '%s:%s' % (error, cause)
+                                raise RuntimeError('%s:%s' % (error, cause))
 
                     # then cope with the general case
 
                     else:
-                        raise RuntimeError, error
+                        raise RuntimeError(error)
 
             return
 
@@ -348,7 +347,7 @@ def CCP4DecoratorFactory(DriverInstance):
             # check that the program has finished...
 
             if not self.finished():
-                raise RuntimeError, 'program has not finished'
+                raise RuntimeError('program has not finished')
 
             # look in the last 10 lines for the status
 
@@ -378,7 +377,7 @@ def CCP4DecoratorFactory(DriverInstance):
                         status = line.split(':')[1].replace('*', '')
                         return status.strip()
 
-            raise RuntimeError, 'could not find status'
+            raise RuntimeError('could not find status')
 
         def parse_ccp4_loggraph(self):
             '''Look through the standard output of the program for
@@ -431,7 +430,7 @@ def CCP4DecoratorFactory(DriverInstance):
                     self._loggraph[current]['columns'] = tokens[1].split()
 
                     if len(tokens) < 4:
-                        raise RuntimeError, 'loggraph "%s" broken' % current
+                        raise RuntimeError('loggraph "%s" broken' % current)
 
                     data = tokens[3].split('\n')
 
@@ -458,8 +457,8 @@ def CCP4DecoratorFactory(DriverInstance):
     return CCP4Decorator()
 
 if __name__ == '__main__':
-    if not os.environ.has_key('XIA2CORE_ROOT'):
-        raise RuntimeError, 'XIA2CORE_ROOT not defined'
+    if 'XIA2CORE_ROOT' not in os.environ:
+        raise RuntimeError('XIA2CORE_ROOT not defined')
 
     sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                                  'Python',
@@ -473,4 +472,4 @@ if __name__ == '__main__':
 
     from pydoc import help
 
-    print help(d.__class__)
+    print(help(d.__class__))

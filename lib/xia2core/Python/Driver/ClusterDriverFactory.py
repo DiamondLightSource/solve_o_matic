@@ -17,7 +17,7 @@
 
 import os
 
-from SunGridEngineClusterDriver import SunGridEngineClusterDriver
+from .SunGridEngineClusterDriver import SunGridEngineClusterDriver
 
 class _ClusterDriverFactory:
 
@@ -30,7 +30,7 @@ class _ClusterDriverFactory:
         # should probably write a message or something explaining
         # that the following Driver implementation is being used
 
-        if os.environ.has_key('XIA2CORE_DRIVERTYPE'):
+        if 'XIA2CORE_DRIVERTYPE' in os.environ:
             if 'cluster' in os.environ['XIA2CORE_DRIVERTYPE']:
                 self.setDriver_type(os.environ['XIA2CORE_DRIVERTYPE'])
 
@@ -43,7 +43,7 @@ class _ClusterDriverFactory:
         '''Set the kind of driver this factory should produce.'''
 
         if not type in self._implemented_types:
-            raise RuntimeError, 'unimplemented driver class: %s' % type
+            raise RuntimeError('unimplemented driver class: %s' % type)
 
         self._driver_type = type
 
@@ -59,7 +59,7 @@ class _ClusterDriverFactory:
         if type == 'cluster.sge':
             return SunGridEngineClusterDriver()
 
-        raise RuntimeError, 'Driver class "%s" unknown' % type
+        raise RuntimeError('Driver class "%s" unknown' % type)
 
 ClusterDriverFactory = _ClusterDriverFactory()
 

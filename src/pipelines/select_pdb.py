@@ -5,7 +5,7 @@ import sys
 import math
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'src'))
@@ -42,7 +42,7 @@ def select_right_pdb(hklin, pdb_list):
                                                         ip.get_cell())
                 else:
                     cells[xyzin] = ip.get_cell()
-        except RuntimeError, e:
+        except RuntimeError as e:
             sys.stderr.write('%s\n' % e)
             continue
 
@@ -155,9 +155,9 @@ if __name__ == '__main__':
 
     try:
         xyzin = select_right_pdb(hklin, candidates)
-    except RuntimeError, e:
+    except RuntimeError as e:
         sys.stderr.write('%s\n' % e)
         sys.exit(1)
 
     if xyzin:
-        print '%s' % xyzin
+        print('%s' % xyzin)

@@ -2,7 +2,7 @@ import os
 import sys
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'lib'))
@@ -11,7 +11,7 @@ if not os.environ['SOM_ROOT'] in sys.path:
 
 # FIXME add an interrogate_image module - e.g. from fast_dp
 
-from interrogate_image import interrogate_image
+from .interrogate_image import interrogate_image
 
 # now import the factories that we will need
 
@@ -88,7 +88,7 @@ class characterise_diffraction:
         if len(self._interrogate_image.get_images()) < 20:
             self._images = self._interrogate_image.get_images()
         else:
-            raise RuntimeError, 'implement something here'
+            raise RuntimeError('implement something here')
 
         return
 
@@ -135,6 +135,6 @@ if __name__ == '__main__':
     cd.set_image(sys.argv[1])
     cd.characterise()
 
-    print 'Unit cell: %.3f %.3f %.3f %.3f %.3f %.3f' % cd.get_cell()
-    print 'Spacegroup: %s' % cd.get_spacegroup()
-    print 'Mosaic: %.2f' % cd.get_mosaic()
+    print('Unit cell: %.3f %.3f %.3f %.3f %.3f %.3f' % cd.get_cell())
+    print('Spacegroup: %s' % cd.get_spacegroup())
+    print('Mosaic: %.2f' % cd.get_mosaic())

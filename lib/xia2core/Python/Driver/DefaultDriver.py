@@ -47,15 +47,15 @@
 import os
 import sys
 
-from DriverHelper import error_no_program, error_kill, error_abrt
-from DriverHelper import error_segv, check_return_code, error_missing_library
-from DriverHelper import error_fp
-from DriverHelper import generate_random_name, executable_exists
+from .DriverHelper import error_no_program, error_kill, error_abrt
+from .DriverHelper import error_segv, check_return_code, error_missing_library
+from .DriverHelper import error_fp
+from .DriverHelper import generate_random_name, executable_exists
 
 # out of context stuff
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 root = os.path.join(os.environ['XIA2CORE_ROOT'], 'Python')
 
@@ -203,8 +203,8 @@ class DefaultDriver:
         if full_path:
             self._executable = full_path
         else:
-            raise NotAvailableError, 'executable %s does not exist in PATH' % \
-                  executable
+            raise NotAvailableError('executable %s does not exist in PATH' % \
+                  executable)
 
         # FIXME record the fact that the program in question has been used -
         # this will be used to track all of the programs which have been
@@ -297,7 +297,7 @@ class DefaultDriver:
         '''Set the command line which wants to be run.'''
 
         if not type(command_line) == type([]):
-            raise RuntimeError, 'command line should be a list'
+            raise RuntimeError('command line should be a list')
 
         self._command_line = command_line
 
@@ -349,7 +349,7 @@ class DefaultDriver:
         interactive job, if batch start the batch job. This implementation
         will fail because youre not supposed to use it!'''
 
-        raise RuntimeError, 'Do not use the DefaultDriver class directly'
+        raise RuntimeError('Do not use the DefaultDriver class directly')
 
         return
 
@@ -392,7 +392,7 @@ class DefaultDriver:
     def _input(self, record):
         '''Pass record into the child programs standard input.'''
 
-        raise RuntimeError, 'Do not use the DefaultDriver class directly'
+        raise RuntimeError('Do not use the DefaultDriver class directly')
 
     def input(self, record, newline = True):
         '''Pass record into child program via _input & copying mechanism.'''
@@ -414,7 +414,7 @@ class DefaultDriver:
     def _output(self):
         '''Pass record from the child programs standard output.'''
 
-        raise RuntimeError, 'Do not use the DefaultDriver class directly'
+        raise RuntimeError('Do not use the DefaultDriver class directly')
 
     def output(self):
         '''Pull a record from the child program via _output.'''
@@ -483,7 +483,7 @@ class DefaultDriver:
     def close(self):
         '''Close the standard input channel.'''
 
-        raise RuntimeError, 'Do not use the DefaultDriver class directly'
+        raise RuntimeError('Do not use the DefaultDriver class directly')
 
     def close_wait(self):
         '''Close the standard input channel and wait for the standard
@@ -503,7 +503,7 @@ class DefaultDriver:
     def kill(self):
         '''Kill the child process.'''
 
-        raise RuntimeError, 'Do not use the DefaultDriver class directly'
+        raise RuntimeError('Do not use the DefaultDriver class directly')
 
     def status(self):
         '''Check the status of the child process - implemented by _status
@@ -515,7 +515,7 @@ class DefaultDriver:
         '''The acrual implementation - this MUST be overridden - at the
         very least return 0.'''
 
-        raise RuntimeError, 'Do not use the DefaultDriver class directly'
+        raise RuntimeError('Do not use the DefaultDriver class directly')
 
     # debugging methods
 
@@ -535,6 +535,6 @@ if __name__ == '__main__':
     try:
         d = DefaultDriver()
         d.start()
-        print 'You should never see this message'
-    except RuntimeError, e:
-        print 'All is well'
+        print('You should never see this message')
+    except RuntimeError as e:
+        print('All is well')

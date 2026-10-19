@@ -1,8 +1,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -45,13 +45,13 @@ def Unique(DriverType = None):
             self.check_hklout()
 
             if not self._cell:
-                raise RuntimeError, 'cell not assigned'
+                raise RuntimeError('cell not assigned')
 
             if not self._symmetry:
-                raise RuntimeError, 'symmetry not assigned'
+                raise RuntimeError('symmetry not assigned')
 
             if not self._resolution:
-                raise RuntimeError, 'resolution not assigned'
+                raise RuntimeError('resolution not assigned')
 
             self.start()
             self.input('cell %f %f %f %f %f %f' % self._cell)

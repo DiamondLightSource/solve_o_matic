@@ -6,7 +6,7 @@ import math
 import time
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'src'))
@@ -112,7 +112,7 @@ class ligand_pipeline:
         if self._mode == LP_MODE_MR:
             return self.ligand_pipeline_molecular_replacement()
 
-        raise RuntimeError, 'unhandled mode: %s' % self._mode
+        raise RuntimeError('unhandled mode: %s' % self._mode)
 
     def ligand_pipeline_molecular_substitution(self):
 
@@ -124,23 +124,23 @@ class ligand_pipeline:
         temporary_files = []
 
         if not self._hklin:
-            raise RuntimeError, 'hklin not defined'
+            raise RuntimeError('hklin not defined')
 
         if not self._hklout:
-            raise RuntimeError, 'hklout not defined'
+            raise RuntimeError('hklout not defined')
 
         if not self._xyzin:
-            raise RuntimeError, 'xyzin not defined'
+            raise RuntimeError('xyzin not defined')
 
         if not self._xyzout:
-            raise RuntimeError, 'xyzout not defined'
+            raise RuntimeError('xyzout not defined')
 
         if not self._symmetry:
             # copy the symmetry from the input pdb, if no reindex operation
             # set...
 
             if self._reindex_op and False:
-                raise RuntimeError, 'symmetry not defined'
+                raise RuntimeError('symmetry not defined')
 
             ip = self.module().interrogate_pdb()
             ip.set_xyzin(self._xyzin)
@@ -189,12 +189,12 @@ class ligand_pipeline:
             if (math.fabs(pdb_cell[j] - cell[j]) / cell[j]) > 0.1:
                 for temporary_file in temporary_files:
                     os.remove(temporary_file)
-                raise RuntimeError, 'mismatching unit cell constants'
+                raise RuntimeError('mismatching unit cell constants')
 
         if pdb_symmetry != self._symmetry.replace(' ', ''):
             for temporary_file in temporary_files:
                 os.remove(temporary_file)
-            raise RuntimeError, 'mismatching symmetry'
+            raise RuntimeError('mismatching symmetry')
 
         # copy the experimental cell constants in to the pdb file -> this
         # should give better refinement results
@@ -211,7 +211,7 @@ class ligand_pipeline:
         pp.prepare_pdb_refine()
 
         if get_debug():
-            print 'Preparation: %.2f' % (time.time() - t0)
+            print('Preparation: %.2f' % (time.time() - t0))
 
         t0 = time.time()
 
@@ -230,7 +230,7 @@ class ligand_pipeline:
         rbr.rigid_body_refine()
 
         if get_debug():
-            print 'Ridig body: %.2f' % (time.time() - t0)
+            print('Ridig body: %.2f' % (time.time() - t0))
 
         t0 = time.time()
 
@@ -246,7 +246,7 @@ class ligand_pipeline:
         r.refine()
 
         if get_debug():
-            print 'Restrained refinement: %.2f' % (time.time() - t0)
+            print('Restrained refinement: %.2f' % (time.time() - t0))
 
         t0 = time.time()
 
@@ -254,10 +254,10 @@ class ligand_pipeline:
 
         residuals = r.get_residuals()
 
-        print '%5s %6s %6s %6s' % ('Cycle', 'Rwork', 'Rfree', 'FOM')
+        print('%5s %6s %6s %6s' % ('Cycle', 'Rwork', 'Rfree', 'FOM'))
         for cycle in sorted(residuals):
             r, rfree, fom = residuals[cycle]
-            print '%5d %6.4f %6.4f %6.4f' % (cycle, r, rfree, fom)
+            print('%5d %6.4f %6.4f %6.4f' % (cycle, r, rfree, fom))
 
         for temporary_file in temporary_files:
             os.remove(temporary_file)
@@ -274,23 +274,23 @@ class ligand_pipeline:
         temporary_files = []
 
         if not self._hklin:
-            raise RuntimeError, 'hklin not defined'
+            raise RuntimeError('hklin not defined')
 
         if not self._hklout:
-            raise RuntimeError, 'hklout not defined'
+            raise RuntimeError('hklout not defined')
 
         if not self._xyzin:
-            raise RuntimeError, 'xyzin not defined'
+            raise RuntimeError('xyzin not defined')
 
         if not self._xyzout:
-            raise RuntimeError, 'xyzout not defined'
+            raise RuntimeError('xyzout not defined')
 
         if not self._symmetry:
             # copy the symmetry from the input pdb, if no reindex operation
             # set...
 
             if self._reindex_op and False:
-                raise RuntimeError, 'symmetry not defined'
+                raise RuntimeError('symmetry not defined')
 
             ip = self.module().interrogate_pdb()
             ip.set_xyzin(self._xyzin)
@@ -335,12 +335,12 @@ class ligand_pipeline:
             if (math.fabs(pdb_cell[j] - cell[j]) / cell[j]) > 0.1:
                 for temporary_file in temporary_files:
                     os.remove(temporary_file)
-                raise RuntimeError, 'mismatching unit cell constants'
+                raise RuntimeError('mismatching unit cell constants')
 
         if pdb_symmetry != self._symmetry.replace(' ', ''):
             for temporary_file in temporary_files:
                 os.remove(temporary_file)
-            raise RuntimeError, 'mismatching symmetry'
+            raise RuntimeError('mismatching symmetry')
 
         # copy the experimental cell constants in to the pdb file -> this
         # should give better refinement results
@@ -389,10 +389,10 @@ class ligand_pipeline:
 
         residuals = r.get_residuals()
 
-        print '%5s %6s %6s %6s' % ('Cycle', 'Rwork', 'Rfree', 'FOM')
+        print('%5s %6s %6s %6s' % ('Cycle', 'Rwork', 'Rfree', 'FOM'))
         for cycle in sorted(residuals):
             r, rfree, fom = residuals[cycle]
-            print '%5d %6.4f %6.4f %6.4f' % (cycle, r, rfree, fom)
+            print('%5d %6.4f %6.4f %6.4f' % (cycle, r, rfree, fom))
 
         for temporary_file in temporary_files:
             os.remove(temporary_file)
@@ -439,7 +439,7 @@ def select_right_pdb(hklin, pdb_list):
             cells[xyzin] = ip.get_cell()
 
     if len(candidates) == 0:
-        raise RuntimeError, 'no matching coordinate files found'
+        raise RuntimeError('no matching coordinate files found')
 
     # then if there are more than one, see if one matches closer than
     # the others... do this by sorting on the absolute differences in
@@ -514,11 +514,11 @@ if __name__ == '__main__':
     # no matching names, proceed with all files...
 
     if len(candidates) == 0:
-        print 'none of the file names matched %s: trying all' % os.getcwd()
+        print('none of the file names matched %s: trying all' % os.getcwd())
         candidates = sys.argv[1:]
 
     if len(candidates) == 0:
-        raise RuntimeError, 'no candidate pdb files matched %s' % os.getcwd()
+        raise RuntimeError('no candidate pdb files matched %s' % os.getcwd())
 
     hklin = 'fast_dp.mtz'
     hklout = 'map.mtz'
@@ -527,9 +527,9 @@ if __name__ == '__main__':
     xyzin = select_right_pdb(hklin, candidates)
 
     if not xyzin:
-        raise RuntimeError, 'no candidate pdb files matched %s' % os.getcwd()
+        raise RuntimeError('no candidate pdb files matched %s' % os.getcwd())
 
-    print 'Selected %s' % xyzin
+    print('Selected %s' % xyzin)
 
     im = module_factory().interrogate_mtz()
     im.set_hklin(hklin)

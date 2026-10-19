@@ -1,6 +1,6 @@
 import os
 
-from strategy import BestStrategy
+from .strategy import BestStrategy
 
 class embl_factory:
 

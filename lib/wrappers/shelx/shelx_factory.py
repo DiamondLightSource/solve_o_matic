@@ -1,9 +1,9 @@
 import os
 
-from mtz2sca import Mtz2sca as _Mtz2sca
-from shelxc import Shelxc as _Shelxc
-from shelxd import Shelxd as _Shelxd
-from shelxe import Shelxe as _Shelxe
+from .mtz2sca import Mtz2sca as _Mtz2sca
+from .shelxc import Shelxc as _Shelxc
+from .shelxd import Shelxd as _Shelxd
+from .shelxe import Shelxe as _Shelxe
 
 class shelx_factory:
 

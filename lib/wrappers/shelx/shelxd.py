@@ -1,8 +1,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -32,7 +32,7 @@ def Shelxd(DriverType = None):
 
         def shelxd(self):
             if not self._name:
-                raise RuntimeError, 'name not assigned'
+                raise RuntimeError('name not assigned')
 
             # check that the input files are present according to self._name
 

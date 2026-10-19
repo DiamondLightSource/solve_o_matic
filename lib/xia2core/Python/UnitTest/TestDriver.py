@@ -13,8 +13,8 @@
 
 import os, sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -129,7 +129,7 @@ class TestDriver(unittest.TestCase):
         # this is OK
         try:
             d.close()
-        except RuntimeError, re:
+        except RuntimeError as re:
             # this could have one or more records...
             # self.assertEqual(str(re), 'child process has termimated')
             self.assertEqual(1, 1)
@@ -146,7 +146,7 @@ class TestDriver(unittest.TestCase):
 
         try:
             d.check_for_errors()
-        except RuntimeError, re:
+        except RuntimeError as re:
             found_exception = True
             exception_str = str(re)
 
@@ -175,7 +175,7 @@ class TestDriver(unittest.TestCase):
                 if not line:
                     break
 
-        except RuntimeError, e:
+        except RuntimeError as e:
             self.assertEqual(str(e), 'child segmentation fault')
             return
 
@@ -184,7 +184,7 @@ class TestDriver(unittest.TestCase):
 
         try:
             d.check_for_errors()
-        except RuntimeError, re:
+        except RuntimeError as re:
             found_exception = True
             exception_str = str(re)
 
@@ -216,7 +216,7 @@ class TestDriver(unittest.TestCase):
                 line = d.output()
                 if not line:
                     break
-        except RuntimeError, e:
+        except RuntimeError as e:
             # this should probably error
             self.assertEqual(str(e), 'child aborted')
             return
@@ -227,7 +227,7 @@ class TestDriver(unittest.TestCase):
 
         try:
             d.check_for_errors()
-        except RuntimeError, re:
+        except RuntimeError as re:
             found_exception = True
             exception_str = str(re)
 

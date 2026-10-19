@@ -3,7 +3,7 @@ import sys
 import math
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'src'))
@@ -76,23 +76,23 @@ class ligand_pipeline:
         temporary_files = []
 
         if not self._hklin:
-            raise RuntimeError, 'hklin not defined'
+            raise RuntimeError('hklin not defined')
 
         if not self._hklout:
-            raise RuntimeError, 'hklout not defined'
+            raise RuntimeError('hklout not defined')
 
         if not self._xyzin:
-            raise RuntimeError, 'xyzin not defined'
+            raise RuntimeError('xyzin not defined')
 
         if not self._xyzout:
-            raise RuntimeError, 'xyzout not defined'
+            raise RuntimeError('xyzout not defined')
 
         if not self._symmetry:
             # copy the symmetry from the input pdb, if no reindex operation
             # set...
 
             if self._reindex_op:
-                raise RuntimeError, 'symmetry not defined'
+                raise RuntimeError('symmetry not defined')
 
             ip = self.module().interrogate_pdb()
             ip.set_xyzin(self._xyzin)
@@ -138,12 +138,12 @@ class ligand_pipeline:
             if (math.fabs(pdb_cell[j] - cell[j]) / cell[j]) > 0.1:
                 for temporary_file in temporary_files:
                     os.remove(temporary_file)
-                raise RuntimeError, 'mismatching unit cell constants'
+                raise RuntimeError('mismatching unit cell constants')
 
         if pdb_symmetry != self._symmetry.replace(' ', ''):
             for temporary_file in temporary_files:
                 os.remove(temporary_file)
-            raise RuntimeError, 'mismatching symmetry'
+            raise RuntimeError('mismatching symmetry')
 
         # copy the experimental cell constants in to the pdb file -> this
         # should give better refinement results
@@ -187,10 +187,10 @@ class ligand_pipeline:
 
         residuals = r.get_residuals()
 
-        print '%5s %6s %6s %6s' % ('Cycle', 'Rwork', 'Rfree', 'FOM')
+        print('%5s %6s %6s %6s' % ('Cycle', 'Rwork', 'Rfree', 'FOM'))
         for cycle in sorted(residuals):
             r, rfree, fom = residuals[cycle]
-            print '%5d %6.4f %6.4f %6.4f' % (cycle, r, rfree, fom)
+            print('%5d %6.4f %6.4f %6.4f' % (cycle, r, rfree, fom))
 
         for temporary_file in temporary_files:
             os.remove(temporary_file)
@@ -200,8 +200,7 @@ class ligand_pipeline:
 if __name__ == '__main__':
 
     if len(sys.argv) < 5 or len(sys.argv) > 7:
-        raise RuntimeError, \
-              '%s hklin xyzin hklout xyzout [symm] [reindex_op]' % sys.argv[0]
+        raise RuntimeError('%s hklin xyzin hklout xyzout [symm] [reindex_op]' % sys.argv[0])
 
     hklin = sys.argv[1]
     xyzin = sys.argv[2]

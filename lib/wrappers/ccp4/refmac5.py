@@ -1,8 +1,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -79,8 +79,8 @@ def Refmac5(DriverType = None):
             self.check_xyzout()
 
             if not self._mode in [self._mode_restrained, self._mode_rigidbody]:
-                raise RuntimeError, 'refinement mode %s not supported' % \
-                      self._mode
+                raise RuntimeError('refinement mode %s not supported' % \
+                      self._mode)
 
             self.start()
 

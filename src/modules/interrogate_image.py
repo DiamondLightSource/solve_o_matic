@@ -1,11 +1,10 @@
 import os
 import sys
 import subprocess
-import exceptions
 import time
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'lib'))
@@ -67,7 +66,7 @@ def failover_cbf(cbf_file):
 
     header['two_theta'] = 0.0
 
-    for record in open(cbf_file):
+    for record in open(cbf_file, encoding='latin-1'):
         if '_array_data.data' in record:
             break
 
@@ -135,8 +134,8 @@ def failover_cbf(cbf_file):
             continue
 
         if 'Beam_xy' in record:
-            beam_pixels = map(float, record.replace('(', '').replace(
-                ')', '').replace(',', '').split()[2:4])
+            beam_pixels = list(map(float, record.replace('(', '').replace(
+                ')', '').replace(',', '').split()[2:4]))
             header['beam'] = beam_pixels[0] * header['pixel'][0], \
                              beam_pixels[1] * header['pixel'][1]
             continue
@@ -150,7 +149,7 @@ def failover_cbf(cbf_file):
             header['date'] = time.asctime(struct_time)
             header['epoch'] = time.mktime(struct_time)
 
-        except exceptions.Exception, e:
+        except Exception as e:
             pass
 
         try:
@@ -160,7 +159,7 @@ def failover_cbf(cbf_file):
             header['date'] = time.asctime(struct_time)
             header['epoch'] = time.mktime(struct_time)
 
-        except exceptions.Exception, e:
+        except Exception as e:
             pass
 
 
@@ -171,7 +170,7 @@ def failover_cbf(cbf_file):
             header['date'] = time.asctime(struct_time)
             header['epoch'] = time.mktime(struct_time)
 
-        except exceptions.Exception, e:
+        except Exception as e:
             pass
 
     # cope with vertical goniometer on I24 @ DLS from 2015/1/1
@@ -215,7 +214,7 @@ def read_image_metadata(image):
 
             return metadata
 
-    except exceptions.Exception, e:
+    except Exception as e:
         pass
 
 
@@ -274,8 +273,8 @@ def read_image_metadata(image):
             elif detector == 'DECTRIS':
                 metadata['detector'] = 'PILATUS_6M'
             else:
-                raise RuntimeError, 'detector %s not yet supported' % \
-                      detector
+                raise RuntimeError('detector %s not yet supported' % \
+                      detector)
 
     if (metadata['detector'] == 'PILATUS_6M') and \
        (metadata['size'] == (1679, 1475)):
@@ -364,8 +363,8 @@ if __name__ == '__main__':
 
     ii.set_image(sys.argv[1])
 
-    print ii.get_template()
-    print ii.get_directory()
-    print ii.get_images()
-    print ii.get_distance()
-    print ii.get_wavelength()
+    print(ii.get_template())
+    print(ii.get_directory())
+    print(ii.get_images())
+    print(ii.get_distance())
+    print(ii.get_wavelength())

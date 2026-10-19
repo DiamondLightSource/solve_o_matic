@@ -9,7 +9,6 @@
 # Code to allow background (i.e. threaded) running of tasks.
 
 import threading
-import exceptions
 import time
 import os
 import sys
@@ -24,7 +23,7 @@ class Background(threading.Thread):
         threading.Thread.__init__(self)
 
         if not hasattr(o, m):
-            raise RuntimeError, 'method missing from object'
+            raise RuntimeError('method missing from object')
 
         self._object = o
         self._method = m
@@ -45,7 +44,7 @@ class Background(threading.Thread):
                 self._result = task(self._arguments)
             else:
                 self._result = task()
-        except exceptions.Exception, e:
+        except Exception as e:
             self._traceback = traceback.format_exc()
             self._exception = e
 
@@ -102,10 +101,10 @@ if __name__ == '__cpu.py__':
         for j in range(2, m):
             if v % j == 0:
                 f = [j]
-                f.extend(factor(v / j))
+                f.extend(factor(v // j))
                 return f
 
         return [v]
 
     for j in range(10000000000, 10000000100):
-        print factor(j)
+        print(factor(j))

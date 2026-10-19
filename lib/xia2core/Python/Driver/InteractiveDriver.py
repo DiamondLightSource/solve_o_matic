@@ -18,8 +18,8 @@
 
 import subprocess
 
-from DefaultDriver import DefaultDriver
-from DriverHelper import kill_process
+from .DefaultDriver import DefaultDriver
+from .DriverHelper import kill_process
 
 class InteractiveDriver(DefaultDriver):
 
@@ -32,7 +32,7 @@ class InteractiveDriver(DefaultDriver):
 
     def start(self):
         if self._executable is None:
-            raise RuntimeError, 'no executable is set.'
+            raise RuntimeError('no executable is set.')
 
         command_line = []
         command_line.append(self._executable)
@@ -71,7 +71,7 @@ class InteractiveDriver(DefaultDriver):
     def _input(self, record):
 
         if not self.check():
-            raise RuntimeError, 'child process has termimated'
+            raise RuntimeError('child process has termimated')
 
         self._popen.stdin.write(record)
 
@@ -93,7 +93,7 @@ class InteractiveDriver(DefaultDriver):
 
     def close(self):
         if not self.check():
-            raise RuntimeError, 'child process has termimated'
+            raise RuntimeError('child process has termimated')
 
         self._popen.stdin.close()
 

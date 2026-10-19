@@ -2,15 +2,15 @@ import os
 import sys
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'lib'))
 
 # external modules used here
 
-from interrogate_mtz import interrogate_mtz
-from symmetry_information import symmetry_information
+from .interrogate_mtz import interrogate_mtz
+from .symmetry_information import symmetry_information
 
 # now import the factories that we will need
 
@@ -93,13 +93,13 @@ class intensity_data_preparation:
         temporary_files = []
 
         if not self._hklin:
-            raise RuntimeError, 'hklin not defined'
+            raise RuntimeError('hklin not defined')
 
         if not self._hklout:
-            raise RuntimeError, 'hklout not defined'
+            raise RuntimeError('hklout not defined')
 
         if not self._symmetry:
-            raise RuntimeError, 'symmetry not defined'
+            raise RuntimeError('symmetry not defined')
 
         # first check that the crystal pointgroup corresponds to the
         # specified symmetry
@@ -116,7 +116,7 @@ class intensity_data_preparation:
            self._symmetry_information.get_pointgroup(self._symmetry):
             for temporary_file in temporary_files:
                 os.remove(temporary_file)
-            raise RuntimeError, 'symmetry mismatch'
+            raise RuntimeError('symmetry mismatch')
 
         # this will implement the following procedure:
         #
@@ -196,8 +196,8 @@ class intensity_data_preparation:
         datasets = mtzdump.get_datasets()
 
         if len(datasets) != 1:
-            raise RuntimeError, 'need exactly one data set in %s' % \
-                  self._hklin
+            raise RuntimeError('need exactly one data set in %s' % \
+                  self._hklin)
 
         info = mtzdump.get_dataset_info(datasets[0])
         cell = tuple(info['cell'])
@@ -246,8 +246,8 @@ class intensity_data_preparation:
 if __name__ == '__main__':
 
     if len(sys.argv) < 4 or len(sys.argv) > 5:
-        raise RuntimeError, '%s hklin hklout symmetry [reindex_op]' % \
-              sys.argv[0]
+        raise RuntimeError('%s hklin hklout symmetry [reindex_op]' % \
+              sys.argv[0])
 
     hklin = sys.argv[1]
     hklout = sys.argv[2]

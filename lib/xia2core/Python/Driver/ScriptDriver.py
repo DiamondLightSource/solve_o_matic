@@ -23,8 +23,8 @@
 import os
 import subprocess
 
-from DefaultDriver import DefaultDriver
-from DriverHelper import script_writer
+from .DefaultDriver import DefaultDriver
+from .DriverHelper import script_writer
 
 # Workings on Windows:
 #

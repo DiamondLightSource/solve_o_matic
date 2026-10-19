@@ -2,7 +2,7 @@ import os
 import sys
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'lib'))
@@ -71,16 +71,16 @@ class pdb_preparation:
 
     def prepare_pdb_refine(self):
         if not self._xyzin:
-            raise RuntimeError, 'xyzin not defined'
+            raise RuntimeError('xyzin not defined')
 
         if not self._xyzout:
-            raise RuntimeError, 'xyzout not defined'
+            raise RuntimeError('xyzout not defined')
 
         if not self._symmetry:
-            raise RuntimeError, 'symmetry not defined'
+            raise RuntimeError('symmetry not defined')
 
         if not self._cell:
-            raise RuntimeError, 'cell not defined'
+            raise RuntimeError('cell not defined')
 
         # this will implement the following procedure
         #
@@ -97,7 +97,7 @@ class pdb_preparation:
 
 if __name__ == '__main__':
     if len(sys.argv) != 4:
-        raise RuntimeError, '%s xyzin xyzout hklin' % sys.argv[0]
+        raise RuntimeError('%s xyzin xyzout hklin' % sys.argv[0])
 
     xyzin = sys.argv[1]
     xyzout = sys.argv[2]
@@ -112,8 +112,8 @@ if __name__ == '__main__':
     datasets = mtzdump.get_datasets()
 
     if len(datasets) != 1:
-        raise RuntimeError, 'need exactly one data set in %s' % \
-              self._hklin
+        raise RuntimeError('need exactly one data set in %s' % \
+              self._hklin)
 
     info = mtzdump.get_dataset_info(datasets[0])
     cell = tuple(info['cell'])

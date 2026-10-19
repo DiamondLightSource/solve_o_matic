@@ -2,7 +2,7 @@ import os
 import sys
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'lib'))
@@ -13,7 +13,7 @@ from wrappers.ccp4.ccp4_factory import ccp4_factory
 
 # and any helpful modules
 
-from interrogate_pdb import interrogate_pdb
+from .interrogate_pdb import interrogate_pdb
 
 class rigid_body_refine:
 
@@ -54,13 +54,13 @@ class rigid_body_refine:
 
     def rigid_body_refine(self):
         if not self._hklin:
-            raise RuntimeError, 'hklin not defined'
+            raise RuntimeError('hklin not defined')
 
         if not self._xyzin:
-            raise RuntimeError, 'xyzin not defined'
+            raise RuntimeError('xyzin not defined')
 
         if not self._xyzout:
-            raise RuntimeError, 'xyzout not defined'
+            raise RuntimeError('xyzout not defined')
 
         name = os.path.split(self._hklin)[-1][:-4]
 
@@ -108,7 +108,7 @@ class rigid_body_refine:
 
         # ok perhaps run some mr...
 
-        print 'Rigid body refinement failed: trying MR'
+        print('Rigid body refinement failed: trying MR')
 
         ip = interrogate_pdb()
 

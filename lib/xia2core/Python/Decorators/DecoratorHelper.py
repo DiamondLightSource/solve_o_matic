@@ -38,11 +38,11 @@ if __name__ == '__main__':
         pass
 
     if inherits_from(B, 'A'):
-        print 'ok'
+        print('ok')
     else:
-        print 'failed'
+        print('failed')
 
     if not inherits_from(C, 'A'):
-        print 'ok'
+        print('ok')
     else:
-        print 'failed'
+        print('failed')

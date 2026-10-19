@@ -13,7 +13,7 @@
 # "ccp4" -> A CCP4 Decorator
 #
 
-from CCP4Decorator import CCP4DecoratorFactory
+from .CCP4Decorator import CCP4DecoratorFactory
 
 class _DecoratorFactory:
     '''A factory singleton to dress Driver instances with decoration
@@ -31,10 +31,10 @@ class _DecoratorFactory:
         if type == 'ccp4':
             return CCP4DecoratorFactory(DriverInstance)
 
-        raise RuntimeError, 'unknown decorator class "%s"' % type
+        raise RuntimeError('unknown decorator class "%s"' % type)
 
 DecoratorFactory = _DecoratorFactory()
 
 if __name__ == '__main__':
     # run some kind of test here
-    raise RuntimeError, 'no test available'
+    raise RuntimeError('no test available')

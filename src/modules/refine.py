@@ -2,7 +2,7 @@ import os
 import sys
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'lib'))
@@ -61,16 +61,16 @@ class refine:
 
     def refine(self):
         if not self._hklin:
-            raise RuntimeError, 'hklin not defined'
+            raise RuntimeError('hklin not defined')
 
         if not self._hklout:
-            raise RuntimeError, 'hklout not defined'
+            raise RuntimeError('hklout not defined')
 
         if not self._xyzin:
-            raise RuntimeError, 'xyzin not defined'
+            raise RuntimeError('xyzin not defined')
 
         if not self._xyzout:
-            raise RuntimeError, 'xyzout not defined'
+            raise RuntimeError('xyzout not defined')
 
         refmac5 = self.ccp4().refmac5()
 

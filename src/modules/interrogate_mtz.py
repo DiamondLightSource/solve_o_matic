@@ -2,7 +2,7 @@ import os
 import sys
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'lib'))
@@ -41,7 +41,7 @@ class interrogate_mtz:
 
     def interrogate_mtz(self):
         if not self._hklin:
-            raise RuntimeError, 'hklin not defined'
+            raise RuntimeError('hklin not defined')
 
         mtzdump = self.ccp4().mtzdump()
         mtzdump.set_hklin(self._hklin)
@@ -50,8 +50,8 @@ class interrogate_mtz:
         datasets = mtzdump.get_datasets()
 
         if len(datasets) != 1:
-            raise RuntimeError, 'need exactly one data set in %s' % \
-                  self._hklin
+            raise RuntimeError('need exactly one data set in %s' % \
+                  self._hklin)
 
         info = mtzdump.get_dataset_info(datasets[0])
         self._cell = tuple(info['cell'])
@@ -69,4 +69,4 @@ if __name__ == '__main__':
     im = interrogate_mtz()
     im.set_hklin(os.path.join(os.environ['SOM_ROOT'], 'data', 'insulin.mtz'))
     im.interrogate_mtz()
-    print im.get_symmetry()
+    print(im.get_symmetry())

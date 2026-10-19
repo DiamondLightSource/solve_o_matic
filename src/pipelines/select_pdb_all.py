@@ -5,7 +5,7 @@ import sys
 import math
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'src'))
@@ -49,7 +49,7 @@ def select_right_pdb(hklin, pdb_list):
             cells[xyzin] = ip.get_cell()
 
     if len(candidates) == 0:
-        raise RuntimeError, 'no matching coordinate files found'
+        raise RuntimeError('no matching coordinate files found')
 
     # then if there are more than one, see if one matches closer than
     # the others... do this by sorting on the absolute differences in
@@ -120,16 +120,16 @@ if __name__ == '__main__':
         candidates.append(arg)
 
     if len(candidates) == 0:
-        raise RuntimeError, 'no candidate pdb files matched %s' % os.getcwd()
+        raise RuntimeError('no candidate pdb files matched %s' % os.getcwd())
 
     hklin = sys.argv[1]
 
     try:
         xyzin = select_right_pdb(hklin, candidates)
-    except RuntimeError, e:
+    except RuntimeError as e:
         xyzin = None
 
     if not xyzin:
-        print 'No files found'
+        print('No files found')
     else:
-        print '%s' % xyzin
+        print('%s' % xyzin)

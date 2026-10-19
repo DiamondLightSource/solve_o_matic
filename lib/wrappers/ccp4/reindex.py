@@ -1,8 +1,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -41,7 +41,7 @@ def Reindex(DriverType = None):
             self.check_hklout()
 
             if not self._symmetry and not self._reindex_op:
-                raise RuntimeError, 'assign either spacegroup or reindex'
+                raise RuntimeError('assign either spacegroup or reindex')
 
             self.start()
 

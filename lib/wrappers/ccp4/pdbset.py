@@ -1,8 +1,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 xia2core_root = os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python')
@@ -44,10 +44,10 @@ def Pdbset(DriverType = None):
             self.check_xyzout()
 
             if not self._cell:
-                raise RuntimeError, 'cell not assigned'
+                raise RuntimeError('cell not assigned')
 
             if not self._symmetry:
-                raise RuntimeError, 'symmetry not assigned'
+                raise RuntimeError('symmetry not assigned')
 
             self.start()
             self.input('cell %f %f %f %f %f %f' % self._cell)

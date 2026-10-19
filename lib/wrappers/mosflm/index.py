@@ -1,8 +1,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -137,6 +137,6 @@ if __name__ == '__main__':
         mi.add_image(image)
     mi.index()
 
-    print 'Unit cell: %.3f %.3f %.3f %.3f %.3f %.3f' % mi.get_cell()
-    print 'Spacegroup: %s' % mi.get_spacegroup()
-    print 'Mosaic: %.2f' % mi.get_mosaic()
+    print('Unit cell: %.3f %.3f %.3f %.3f %.3f %.3f' % mi.get_cell())
+    print('Spacegroup: %s' % mi.get_spacegroup())
+    print('Mosaic: %.2f' % mi.get_mosaic())

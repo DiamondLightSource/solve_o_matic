@@ -2,7 +2,7 @@ import os
 import sys
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'src'))
@@ -69,13 +69,13 @@ class shelx_cc_weak_pipeline:
         temporary_files = []
 
         if not self._hklin:
-            raise RuntimeError, 'hklin not defined'
+            raise RuntimeError('hklin not defined')
 
         if not self._nha:
-            raise RuntimeError, 'nha not defined'
+            raise RuntimeError('nha not defined')
 
         if not self._symmetry:
-            raise RuntimeError, 'symmetry not defined'
+            raise RuntimeError('symmetry not defined')
 
         # prepare intensity data
 
@@ -109,8 +109,7 @@ class shelx_cc_weak_pipeline:
 if __name__ == '__main__':
 
     if len(sys.argv) < 4 or len(sys.argv) > 5:
-        raise RuntimeError, \
-              '%s hklin nha symm [reindex_op]' % sys.argv[0]
+        raise RuntimeError('%s hklin nha symm [reindex_op]' % sys.argv[0])
 
     hklin = sys.argv[1]
     nha = int(sys.argv[2])

@@ -16,8 +16,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -66,8 +66,8 @@ if __name__ == '__main__':
 
     import os
 
-    if not os.environ.has_key('XIA2CORE_ROOT'):
-        raise RuntimeError, 'XIA2CORE_ROOT not defined'
+    if 'XIA2CORE_ROOT' not in os.environ:
+        raise RuntimeError('XIA2CORE_ROOT not defined')
 
     xia2core = os.environ['XIA2CORE_ROOT']
 
@@ -85,4 +85,4 @@ if __name__ == '__main__':
 
     s.write_log_file('sortmtz.log')
 
-    print '%s => %s' % (s.getTask(), status)
+    print('%s => %s' % (s.getTask(), status))

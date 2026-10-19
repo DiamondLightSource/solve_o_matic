@@ -1,8 +1,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -169,9 +169,9 @@ def BestStrategy(DriverType = None):
 
             for record in output:
                 if 'ERROR' in record:
-                    raise RuntimeError, record.strip()
+                    raise RuntimeError(record.strip())
                 if 'Determination of B-factor failed' in record:
-                    raise RuntimeError, record.strip()
+                    raise RuntimeError(record.strip())
 
             # BEWARE this is dependent on order of output
             for j, record in enumerate(output):
@@ -232,15 +232,15 @@ if __name__ == '__main__':
     best.set_anomalous(False)
     best.strategy()
 
-    print 'Native'
-    print 'Start / end / width: %.2f/%.2f/%.2f' % (best.get_phi_start(), best.get_phi_end(), best.get_phi_width())
-    print 'Completeness / multiplicity / resolution: %.2f/%.2f/%.2f' % (best.get_completeness(), best.get_multiplicity(), best.get_resolution())
-    print 'Transmission / exposure %.3f/%.3f' % (best.get_transmission(), best.get_exposure_time())
+    print('Native')
+    print('Start / end / width: %.2f/%.2f/%.2f' % (best.get_phi_start(), best.get_phi_end(), best.get_phi_width()))
+    print('Completeness / multiplicity / resolution: %.2f/%.2f/%.2f' % (best.get_completeness(), best.get_multiplicity(), best.get_resolution()))
+    print('Transmission / exposure %.3f/%.3f' % (best.get_transmission(), best.get_exposure_time()))
 
     best.set_anomalous(True)
     best.strategy()
 
-    print 'Anomalous'
-    print 'Start / end / width: %.2f/%.2f/%.2f' % (best.get_phi_start(), best.get_phi_end(), best.get_phi_width())
-    print 'Completeness / multiplicity / resolution: %.2f/%.2f/%.2f' % (best.get_completeness(), best.get_multiplicity(), best.get_resolution())
-    print 'Transmission / exposure %.3f/%.3f' % (best.get_transmission(), best.get_exposure_time())
+    print('Anomalous')
+    print('Start / end / width: %.2f/%.2f/%.2f' % (best.get_phi_start(), best.get_phi_end(), best.get_phi_width()))
+    print('Completeness / multiplicity / resolution: %.2f/%.2f/%.2f' % (best.get_completeness(), best.get_multiplicity(), best.get_resolution()))
+    print('Transmission / exposure %.3f/%.3f' % (best.get_transmission(), best.get_exposure_time()))

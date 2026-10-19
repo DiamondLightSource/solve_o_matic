@@ -2,7 +2,7 @@ import os
 import sys
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'lib'))
@@ -40,13 +40,13 @@ class interrogate_pdb:
         symmetry = None
 
         if not self._xyzin:
-            raise RuntimeError, 'xyzin not defined'
+            raise RuntimeError('xyzin not defined')
 
         sequence = { }
 
         for record in open(self._xyzin):
             if 'CRYST1' in record[:6]:
-                cell = map(float, record[6:54].split())
+                cell = list(map(float, record[6:54].split()))
                 symmetry = record[55:66].strip()
 
                 continue
@@ -68,7 +68,7 @@ class interrogate_pdb:
                 sequence[n] = res
 
         if not cell or not symmetry:
-            raise RuntimeError, 'CRYST1 record not found in %s' % self._xyzin
+            raise RuntimeError('CRYST1 record not found in %s' % self._xyzin)
 
         self._cell = tuple(cell)
         self._symmetry = symmetry
@@ -120,5 +120,5 @@ if __name__ == '__main__':
 
 
     im.interrogate_pdb()
-    print im.get_symmetry_full()
-    print im.get_molecular_weight()
+    print(im.get_symmetry_full())
+    print(im.get_molecular_weight())

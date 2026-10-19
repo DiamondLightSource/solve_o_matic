@@ -2,7 +2,7 @@ import os
 import sys
 
 if not 'SOM_ROOT' in os.environ:
-    raise RuntimeError, 'SOM_ROOT undefined'
+    raise RuntimeError('SOM_ROOT undefined')
 
 if not os.environ['SOM_ROOT'] in sys.path:
     sys.path.append(os.path.join(os.environ['SOM_ROOT'], 'lib'))
@@ -74,8 +74,8 @@ class find_sites:
         # is fine though I will need their names, e.g. SAD, PEAK and so on.
 
         if len(datasets) != 1:
-            raise RuntimeError, 'need exactly one data set in %s' % \
-                  self._hklin
+            raise RuntimeError('need exactly one data set in %s' % \
+                  self._hklin)
 
         info = mtzdump.get_dataset_info(datasets[0])
         cell = tuple(info['cell'])
@@ -129,7 +129,7 @@ class find_sites:
         for temporary_file in temporary_files:
             try:
                 os.remove(temporary_file)
-            except OSError, e:
+            except OSError as e:
                 pass
 
         return

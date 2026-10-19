@@ -14,8 +14,8 @@
 import os
 import sys
 
-if not os.environ.has_key('XIA2CORE_ROOT'):
-    raise RuntimeError, 'XIA2CORE_ROOT not defined'
+if 'XIA2CORE_ROOT' not in os.environ:
+    raise RuntimeError('XIA2CORE_ROOT not defined')
 
 sys.path.append(os.path.join(os.environ['XIA2CORE_ROOT'],
                              'Python'))
@@ -87,7 +87,7 @@ if __name__ == '__main__':
     s.set_hklin(hklin)
     s.set_hklout(hklout)
 
-    print s.describe()
+    print(s.describe())
 
     status = s.scale()
 
@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
     results = s.parse_ccp4_loggraph()
 
-    print '%s => %s' % (s.get_Task(), status)
+    print('%s => %s' % (s.get_Task(), status))
 
     scalepack = '12287_1_E1_scaled.sca'
     hklout = '12287_1_E1_scaled.broken'
@@ -110,4 +110,4 @@ if __name__ == '__main__':
 
     results = s.parse_ccp4_loggraph()
 
-    print '%s => %s' % (s.get_task(), status)
+    print('%s => %s' % (s.get_task(), status))

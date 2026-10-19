@@ -17,9 +17,9 @@
 import os
 import time
 
-from DefaultDriver import DefaultDriver
-from DriverHelper import script_writer
-from DriverHelper import executable_exists
+from .DefaultDriver import DefaultDriver
+from .DriverHelper import script_writer
+from .DriverHelper import executable_exists
 
 class DefaultClusterDriver(DefaultDriver):
     '''A general class for Driving programs on clusters. This should not
@@ -28,7 +28,7 @@ class DefaultClusterDriver(DefaultDriver):
     def __init__(self):
 
         if os.name != 'posix':
-            raise RuntimeError, 'os "%s" not supported' % os.name
+            raise RuntimeError('os "%s" not supported' % os.name)
 
         DefaultDriver.__init__(self)
 
@@ -61,11 +61,11 @@ class DefaultClusterDriver(DefaultDriver):
 
     def submit(self):
         '''Submit to the queue - this MUST be overloaded.'''
-        raise RuntimeError, 'do not use this class directly'
+        raise RuntimeError('do not use this class directly')
 
     def cleanup(self):
         '''Cleanup after the job is finished.'''
-        raise RuntimeError, 'do not use this class directly'
+        raise RuntimeError('do not use this class directly')
 
     def check(self):
         '''NULL overloading of the default check method.'''
